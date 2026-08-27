@@ -1,0 +1,8 @@
+import {notFound} from 'next/navigation';
+import {SiteFooter,SiteHeader} from '../../site-chrome';
+import {infoPages} from '../content';
+
+export function generateStaticParams(){return Object.keys(infoPages).map(slug=>({slug}))}
+
+export default async function InfoDetail({params}:{params:Promise<{slug:string}>}){const{slug}=await params;const page=infoPages[slug];if(!page)notFound();return <main><SiteHeader/><article className="article-page info-detail"><header><span className="eyebrow">{page.eyebrow}</span><h1>{page.title}</h1><p>{page.intro}</p><small>{page.updated} · 최종 적용 전 전문가 확인 권장</small></header><section className="info-highlights">{page.highlights.map(item=><article key={item.label}><span>{item.label}</span><strong>{item.value}</strong><small>{item.note}</small></article>)}</section>{page.sections.map((section,index)=><section key={section.title}><span className="info-number">0{index+1}</span><h2>{section.title}</h2><p className="body-copy">{section.body}</p><ul className="info-list">{section.items.map(item=><li key={item}>{item}</li>)}</ul></section>)}<section className="info-check"><h2>원장님 확인 체크리스트</h2>{page.checklist.map((item,index)=><label key={item}><input type="checkbox"/><span><b>{String(index+1).padStart(2,'0')}</b>{item}</span></label>)}</section><section className="info-sources"><h2>공식 참고자료</h2><div>{page.sources.map(source=><a key={source.url} href={source.url} target="_blank" rel="noopener noreferrer">{source.label}<span>↗</span></a>)}</div></section><p className="legal-note">이 페이지는 병의원 운영 점검을 돕기 위한 일반 정보이며, 개별 사실관계에 대한 법률·노무·세무 자문을 대신하지 않습니다.</p></article><SiteFooter/></main>}
+
