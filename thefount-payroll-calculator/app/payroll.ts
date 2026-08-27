@@ -1,5 +1,5 @@
 export type EmployerSize = 'under150'|'priority'|'under1000'|'over1000';
-export type CalculationInput = { inputType:'net'|'gross'; amount:number; dependents:number; children:number; employerSize:EmployerSize; durunuri:boolean; smallWorkplace:boolean; overtime:number; night:number; holiday:number; meal:number; childcare:number; transport:number };
+export type CalculationInput = { inputType:'net'|'gross'; netIncludesSeverance:boolean; amount:number; dependents:number; children:number; employerSize:EmployerSize; durunuri:boolean; smallWorkplace:boolean; overtime:number; night:number; holiday:number; meal:number; childcare:number; transport:number };
 
 const RATES = { pension:.0475, health:.03595, ltc:.1314, employeeEmployment:.009, accident:.006 };
 const employmentRate:Record<EmployerSize,number> = { under150:.0115, priority:.0135, under1000:.0155, over1000:.0175 };
@@ -25,12 +25,20 @@ function calculateGross(gross:number, input:CalculationInput){
 
 export function calculatePayroll(input:CalculationInput){
   let baseGross=input.inputType==='gross'?input.amount:input.amount*1.15;
-  if(input.inputType==='net'){let lo=input.amount,hi=input.amount*2.2+1000000;for(let i=0;i<42;i++){const mid=(lo+hi)/2;calculateGross(mid,input).net<input.amount?lo=mid:hi=mid;}baseGross=round((lo+hi)/2);}
+  if(input.inputType==='net'){
+    let lo=0,hi=input.amount*2.2+1000000;
+    for(let i=0;i<42;i++){
+      const mid=(lo+hi)/2, core=calculateGross(mid,input);
+      const contractedNet=core.net+(input.netIncludesSeverance?mid/12:0);
+      contractedNet<input.amount?lo=mid:hi=mid;
+    }
+    baseGross=round((lo+hi)/2);
+  }
   const hourly=baseGross/209, multiplier=input.smallWorkplace?1:1.5;
   const overtime=round(hourly*input.overtime*multiplier), night=round(hourly*input.night*(input.smallWorkplace?1:.5)), holiday=round(hourly*input.holiday*multiplier), overtimeTotal=overtime+night+holiday;
   const gross=baseGross+overtimeTotal, core=calculateGross(gross,input), severance=round(gross/12);
   const employerTotal=core.gross+core.employerContributions.total+severance-core.durunuri.employerSupport;
-  return {...core,severance,employerTotal,overtimePay:{hourlyWage:round(hourly),overtime,night,holiday,total:overtimeTotal}};
+  return {...core,severance,employerTotal,contractedNet:core.net+(input.inputType==='net'&&input.netIncludesSeverance?severance:0),overtimePay:{hourlyWage:round(hourly),overtime,night,holiday,total:overtimeTotal}};
 }
 export const formatWon=(n:number)=>`${Math.round(n).toLocaleString('ko-KR')}원`;
 export const formatEasyWon=(n:number)=>{
@@ -39,3 +47,4 @@ export const formatEasyWon=(n:number)=>{
   if(absolute>=10000)return `${Math.round(rounded/10000).toLocaleString('ko-KR')}만원`;
   return `${rounded.toLocaleString('ko-KR')}원`;
 };
+
