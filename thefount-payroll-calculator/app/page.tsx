@@ -3,7 +3,7 @@ import { FormEvent, useMemo, useState } from 'react';
 import { calculatePayroll, formatEasyWon, formatWon, type CalculationInput } from './payroll';
 import { SiteFooter, SiteHeader } from './site-chrome';
 import { Guide, GuideLabel } from './input-guide';
-const presets = [['간호조무사',2300000],['피부관리사',2500000],['상담실장',3500000],['닥터',13000000]] as const;
+const presets = [['간호조무사',2300000],['피부관리사',2500000],['상담실장',3500000],['페이닥터',13000000]] as const;
 const initial:CalculationInput={inputType:'net',amount:3500000,dependents:1,children:0,employerSize:'under150',durunuri:false,smallWorkplace:false,overtime:0,night:0,holiday:0,meal:0,childcare:0,transport:0};
 function MoneyInput({value,onChange,label}:{value:number;onChange:(v:number)=>void;label:string}){return <input aria-label={label} inputMode="numeric" value={value?value.toLocaleString('ko-KR'):''} onChange={e=>onChange(Number(e.target.value.replace(/\D/g,'')))} placeholder="0"/>}
 export default function Home(){
