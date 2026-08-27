@@ -2,7 +2,7 @@
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 
-const payrollMenus=[{href:'/',label:'인건비 계산기'},{href:'/hiring',label:'직원 추가채용 계산기'},{href:'/period',label:'재직기간 계산기'},{href:'/team',label:'팀 인건비'}] as const;
+const payrollMenus=[{href:'/',label:'인건비 계산기'},{href:'/team',label:'팀 인건비'},{href:'/period',label:'재직기간 계산기'},{href:'/hiring',label:'직원 추가채용 계산기'}] as const;
 const infoMenus=[{href:'/articles/net-contract',label:'네트제 계약'},{href:'/articles/durunuri',label:'두루누리'},{href:'/info/workplace-size',label:'5인 미만·이상 차이'},{href:'/info/employment-contract',label:'근로계약서 체크리스트'},{href:'/info/resignation',label:'직원 퇴사 체크리스트'},{href:'/info/incentive',label:'인센티브 계약 가이드'},{href:'/info/non-covered',label:'비급여 보고·가격 공개'},{href:'/info/minimum-wage',label:'최저임금·주휴수당'}] as const;
 const venture='https://nextbridge-vercel-upload.vercel.app/';
 
