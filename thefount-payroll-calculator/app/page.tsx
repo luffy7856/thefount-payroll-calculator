@@ -3,6 +3,7 @@ import { FormEvent, useMemo, useState } from 'react';
 import { calculatePayroll, formatEasyWon, formatWon, type CalculationInput } from './payroll';
 import { SiteFooter, SiteHeader } from './site-chrome';
 import { Guide, GuideLabel } from './input-guide';
+import { ManualButton } from './manual-button';
 const presets = [['간호조무사',2300000],['피부관리사',2500000],['상담실장',3500000],['페이닥터',13000000]] as const;
 const initial:CalculationInput={inputType:'net',netIncludesSeverance:false,amount:3500000,dependents:1,children:0,employerSize:'under150',durunuri:false,smallWorkplace:false,overtime:0,night:0,holiday:0,meal:0,childcare:0,transport:0};
 function MoneyInput({value,onChange,label}:{value:number;onChange:(v:number)=>void;label:string}){return <input aria-label={label} inputMode="numeric" value={value?value.toLocaleString('ko-KR'):''} onChange={e=>onChange(Number(e.target.value.replace(/\D/g,'')))} placeholder="0"/>}
@@ -11,7 +12,7 @@ export default function Home(){
  const update=<K extends keyof CalculationInput>(key:K,value:CalculationInput[K])=>setForm(s=>({...s,[key]:value}));
  const submit=(e:FormEvent)=>{e.preventDefault();setSubmitted(form);setTimeout(()=>document.getElementById('result')?.scrollIntoView({behavior:'smooth',block:'start'}),20)};
  return <main><SiteHeader/>
- <section className="hero" id="top"><div className="eyebrow">THE FOUNT · CLINIC OPERATIONS</div><h1>직원 월급, 숫자 하나보다<br/><em>진짜 병원 부담</em>을 보세요.</h1><p>실수령액을 입력하면 세전 급여, 4대보험 사업주분, 퇴직금과 가산수당을 한 번에 계산합니다.</p><div className="hero-metrics"><div><strong>4대보험</strong><span>근로자·사업주 구분</span></div><div><strong>퇴직금</strong><span>매월 1/12 적립</span></div><div><strong>간이세액</strong><span>부양가족 반영</span></div></div></section>
+ <section className="hero" id="top"><ManualButton slug="payroll"/><div className="eyebrow">THE FOUNT · CLINIC OPERATIONS</div><h1>직원 월급, 숫자 하나보다<br/><em>진짜 병원 부담</em>을 보세요.</h1><p>실수령액을 입력하면 세전 급여, 4대보험 사업주분, 퇴직금과 가산수당을 한 번에 계산합니다.</p><div className="hero-metrics"><div><strong>4대보험</strong><span>근로자·사업주 구분</span></div><div><strong>퇴직금</strong><span>매월 1/12 적립</span></div><div><strong>간이세액</strong><span>부양가족 반영</span></div></div></section>
  <section className="calculator-shell" id="calculator"><form className="form-card" onSubmit={submit}><div className="section-head"><div><span className="step">01</span><h2>급여 조건 입력</h2></div><p>월 단위 · 대한민국 원화</p></div>
  <div className="segmented"><button type="button" className={form.inputType==='net'?'active':''} onClick={()=>update('inputType','net')}>실수령액 기준</button><button type="button" className={form.inputType==='gross'?'active':''} onClick={()=>update('inputType','gross')}>총 지급액 기준</button></div>
  {form.inputType==='net'&&<fieldset className="severance-choice"><legend>입력한 실수령액에 퇴직금이 포함되어 있나요?</legend><div><button type="button" className={!form.netIncludesSeverance?'active':''} aria-pressed={!form.netIncludesSeverance} onClick={()=>update('netIncludesSeverance',false)}><b>퇴직금 미포함</b><span>입력액 전부를 매월 수령</span></button><button type="button" className={form.netIncludesSeverance?'active':''} aria-pressed={form.netIncludesSeverance} onClick={()=>update('netIncludesSeverance',true)}><b>퇴직금 포함</b><span>입력액에서 퇴직금을 제외하고 수령</span></button></div>{form.netIncludesSeverance&&<p>계약 실수령액 = 직원 월 수령액 + 월 퇴직금 적립액으로 역산합니다.</p>}</fieldset>}
