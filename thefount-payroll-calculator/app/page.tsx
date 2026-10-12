@@ -1,10 +1,29 @@
 import Link from 'next/link';
+import type { Metadata } from 'next';
 import { SiteFooter, SiteHeader } from './site-chrome';
 
-const venture='https://nextbridge-vercel-upload.vercel.app/';
-const homepage='https://thefount.vercel.app/';
+const venture='https://www.thefount.co.kr/invest';
+const homepage='https://www.thefount.co.kr/';
 
-export default function CalculatorHome(){return <main className="hub-page"><SiteHeader/>
+export const metadata:Metadata={alternates:{canonical:'/'}};
+
+const schema={
+  '@context':'https://schema.org',
+  '@type':'WebApplication',
+  '@id':'https://www.thefount.co.kr/payroll#application',
+  name:'더파운트 병의원 인건비 계산기',
+  alternateName:'THE FOUNT Clinic Payroll Calculator',
+  url:'https://www.thefount.co.kr/payroll',
+  applicationCategory:'BusinessApplication',
+  operatingSystem:'Web',
+  inLanguage:'ko-KR',
+  isAccessibleForFree:true,
+  description:'직원 실수령액, 세전 급여, 4대보험, 퇴직금과 병원의 총 인건비를 계산하는 병의원 전용 경영 도구',
+  publisher:{'@type':'Organization','@id':'https://www.thefount.co.kr/#organization',name:'더파운트 주식회사',url:'https://www.thefount.co.kr/'},
+  offers:{'@type':'Offer',price:'0',priceCurrency:'KRW'}
+};
+
+export default function CalculatorHome(){return <main className="hub-page"><script type="application/ld+json" dangerouslySetInnerHTML={{__html:JSON.stringify(schema)}}/><SiteHeader/>
   <section className="hub-hero"><span>THE FOUNT · CLINIC MANAGEMENT TOOLS</span><h1>원장님, 무엇을<br/>계산하시겠어요?</h1><p>병원 운영에 필요한 숫자를 쉽고 정확하게 확인하고,<br/>다음 의사결정까지 한곳에서 이어가세요.</p><a className="hub-launcher" href="#tools"><span>계산기와 경영 정보를 선택하세요</span><b>도구 보기 ↓</b></a></section>
   <section className="hub-tools" id="tools">
     <div className="hub-section-title"><span>CALCULATORS &amp; INSIGHTS</span><h2>필요한 도구를 바로 시작하세요</h2></div>

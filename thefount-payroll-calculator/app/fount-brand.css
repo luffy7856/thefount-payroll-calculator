@@ -1,0 +1,109 @@
+/* THE FOUNT ecosystem logo lockup */
+.site-nav .fount-logo {
+  position: relative;
+  display: inline-block;
+  padding-bottom: 14px;
+  color: var(--navy);
+  font-family: Arial, 'Noto Sans KR', sans-serif;
+  font-size: 20px;
+  font-weight: 800;
+  letter-spacing: .22em;
+  line-height: 1;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.site-nav .fount-logo > span {
+  color: #a88445;
+  font-size: 9px;
+  letter-spacing: .18em;
+  margin-right: 2px;
+  vertical-align: top;
+}
+
+.site-nav .fount-logo small {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  display: block;
+  color: #8a979b;
+  font-size: 7px;
+  line-height: 1;
+  letter-spacing: .2em;
+  font-weight: 800;
+  white-space: nowrap;
+}
+
+.site-nav .fount-home-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 36px;
+  padding: 0 11px;
+  border: 1px solid #dce6e1;
+  border-radius: 8px;
+  color: var(--navy);
+  font-size: 11px;
+  font-weight: 750;
+  text-decoration: none;
+  white-space: nowrap;
+}
+.site-nav .fount-home-link:hover { background: #f1f7f3; }
+@media (max-width: 850px) {
+  .site-nav .fount-home-link { margin-left: auto; }
+}
+@media (max-width: 480px) {
+  .site-nav .fount-home-link { min-height: 32px; padding: 0 7px; font-size: 9px; }
+}
+
+.brand-wordmark {
+  position: relative;
+  display: block;
+  padding-bottom: 14px;
+  color: var(--navy);
+  line-height: 1;
+}
+
+.brand-wordmark b {
+  display: block;
+  font-size: 20px;
+  line-height: 1;
+  letter-spacing: .22em;
+  font-weight: 800;
+  white-space: nowrap;
+}
+
+.brand-wordmark b i {
+  color: #a88445;
+  font-size: 9px;
+  font-style: normal;
+  letter-spacing: .18em;
+  margin-right: 2px;
+  vertical-align: top;
+}
+
+.brand-wordmark small {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  display: block;
+  color: #8a979b;
+  font-size: 7px;
+  line-height: 1;
+  letter-spacing: .2em;
+  font-weight: 800;
+  white-space: nowrap;
+}
+
+@media (max-width: 480px) {
+  .site-nav .fount-logo { font-size: 17px; }
+  .site-nav .fount-logo small {
+    font-size: 6px;
+    letter-spacing: .17em;
+  }
+  .brand-wordmark b { font-size: 17px; }
+  .brand-wordmark small {
+    font-size: 6px;
+    letter-spacing: .17em;
+  }
+}

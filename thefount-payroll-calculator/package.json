@@ -8,7 +8,7 @@
   "scripts": {
     "dev": "vinext dev",
     "build": "vinext build",
-    "build:vercel": "next build",
+    "build:vercel": "next build --webpack",
     "start": "vinext start",
     "lint": "eslint . --ignore-pattern dist --ignore-pattern .next",
     "verify": "node --experimental-strip-types scripts/verify-calculations.mjs"
