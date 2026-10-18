@@ -5,7 +5,7 @@ import { SiteFooter, SiteHeader } from './site-chrome';
 const venture='https://www.thefount.co.kr/invest';
 const homepage='https://www.thefount.co.kr/';
 
-export const metadata:Metadata={alternates:{canonical:'/'}};
+export const metadata:Metadata={alternates:{canonical:'https://www.thefount.co.kr/payroll'},openGraph:{title:'더파운트 병의원 인건비 계산기 | 실수령액·4대보험·퇴직금',description:'실수령액부터 병원이 부담하는 월·연간 총 인건비까지 확인하는 병의원 경영 계산기 모음입니다.',url:'https://www.thefount.co.kr/payroll',type:'website',images:['https://www.thefount.co.kr/payroll/og.png']}};
 
 const schema={
   '@context':'https://schema.org',
@@ -37,4 +37,4 @@ export default function CalculatorHome(){return <main className="hub-page"><scri
       <a className="hub-card hub-venture" href={venture} target="_blank" rel="noopener noreferrer"><div><span>07 · VENTURE INVESTMENT</span><h3>벤처투자<br/>소득공제</h3><p>절세 구조와 투자 기회를 함께 확인하세요.</p></div><div className="hub-gold-mark">V</div><strong>바로가기 ↗</strong></a>
       <a className="hub-card hub-advisory" href={homepage} target="_blank" rel="noopener noreferrer"><div><span>THE FOUNT · MEDICAL ADVISORY</span><h3>숫자를 확인했다면,<br/>이제 병원의 구조를 설계할 차례입니다.</h3><p>세무·노무·법무·경영 전문가가 하나의 팀으로 답합니다.</p></div><div className="hub-advisory-mark"><b><i>THE</i> FOUNT</b><small>MEDICAL ADVISORY</small></div><strong>더파운트 홈페이지 →</strong></a>
     </div>
-  </section><SiteFooter/></main>}
+  </section><aside style={{padding:'24px',textAlign:'center',background:'#f5f4ef',color:'#102d3b'}} aria-label="인건비 계산기 사용 안내"><a href="https://www.thefount.co.kr/tools/payroll">병의원 인건비 계산기 사용법·결과 해석 안내 →</a></aside><SiteFooter/></main>}
