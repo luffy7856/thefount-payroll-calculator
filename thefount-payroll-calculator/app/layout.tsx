@@ -13,8 +13,8 @@ export const metadata: Metadata = {
   title:{default:title,template:'%s | 더파운트'},
   description,
   keywords:['더파운트 인건비 계산기','병원 인건비 계산기','병의원 인건비','실수령액 계산기','4대보험 계산기','퇴직금 계산기','네트제 급여','병원 직원 월급'],
-  openGraph:{title,description,url:'/',siteName:'THE FOUNT 병의원 경영 계산기',locale:'ko_KR',type:'website',images:[{url:'/payroll/og.png',width:1200,height:630,alt:'더파운트 병의원 인건비 계산기'}]},
-  twitter:{card:'summary_large_image',title,description,images:['/payroll/og.png']},
+  openGraph:{title,description,url:'/',siteName:'THE FOUNT 병의원 경영 계산기',locale:'ko_KR',type:'website',images:[{url:'https://www.thefount.co.kr/payroll/og.png',width:1200,height:630,alt:'더파운트 병의원 인건비 계산기'}]},
+  twitter:{card:'summary_large_image',title,description,images:['https://www.thefount.co.kr/payroll/og.png']},
   robots:{index:true,follow:true,googleBot:{index:true,follow:true,'max-image-preview':'large','max-snippet':-1}},
   verification:{
     google:'nRJqHwegymSY3Kz9qBkiObdmdWg4qjIMv4DC6wANwXE',
