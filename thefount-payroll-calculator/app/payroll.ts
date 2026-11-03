@@ -11,7 +11,7 @@ const incomeTax = (taxable:number, dependents:number, children:number) => Math.m
 function calculateGross(gross:number, input:CalculationInput){
   const cappedNonTax = Math.min(input.meal,200000)+Math.min(input.childcare,200000)+Math.min(input.transport,200000);
   const taxable = Math.max(0,gross-cappedNonTax);
-  const pensionBase = Math.min(taxable,input.pensionCap ?? 6370000);
+  const pensionBase = Math.min(taxable,input.pensionCap ?? 6590000);   // 국민연금 기준소득월액 상한 659만원 (2026-07 ~ 2027-06, 보건복지부고시 제2026-31호)
   const pension=round(pensionBase*RATES.pension), health=round(taxable*RATES.health), longTermCare=round(health*RATES.ltc), unemployment=round(taxable*RATES.employeeEmployment);
   const taxIncome=incomeTax(taxable,input.dependents,input.children), local=round(taxIncome*.1);
   const employeeTotal=pension+health+longTermCare+unemployment;
