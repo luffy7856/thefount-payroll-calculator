@@ -1,0 +1,25 @@
+{
+  "name": "thefount-payroll-toss",
+  "private": true,
+  "version": "1.0.0",
+  "description": "더파운트 월급·인건비 계산기 — 앱인토스 미니앱 번들 (../app/payroll.ts 계산식을 그대로 씁니다)",
+  "type": "module",
+  "scripts": {
+    "dev": "vite --port 8981",
+    "dist": "vite build",
+    "build": "vite build && ait build",
+    "typecheck": "tsc --noEmit -p ."
+  },
+  "dependencies": {
+    "@apps-in-toss/web-framework": "3.9.0",
+    "react": "19.2.6",
+    "react-dom": "19.2.6"
+  },
+  "devDependencies": {
+    "@types/react": "19.2.14",
+    "@types/react-dom": "19.2.3",
+    "@vitejs/plugin-react": "6.0.2",
+    "typescript": "5.9.3",
+    "vite": "8.0.13"
+  }
+}

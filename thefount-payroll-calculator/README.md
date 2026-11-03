@@ -26,6 +26,10 @@
 
 프로젝트를 GitHub에 올린 뒤 Cloudflare에서 연결하고 빌드 명령을 `pnpm run build`로 설정합니다. Node.js 22 이상을 사용하세요.
 
+### 앱인토스 미니앱 (토스)
+
+`toss/` 폴더는 같은 계산식(`app/payroll.ts`)을 쓰는 토스 미니앱용 정적 화면입니다 (appName `thefount-payroll`, 상담·외부 링크 없음, 모든 계산은 기기 안에서). `.ait` 파일 다시 만들기: `cd toss && npm ci && npm run build` → `toss/thefount-payroll.ait`를 앱인토스 콘솔에 올립니다. 웹사이트 빌드에는 포함되지 않습니다.
+
 ## 로컬 확인
 
 ```bash

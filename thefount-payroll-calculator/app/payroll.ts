@@ -1,5 +1,5 @@
 export type EmployerSize = 'under150'|'priority'|'under1000'|'over1000';
-export type CalculationInput = { inputType:'net'|'gross'; netIncludesSeverance:boolean; amount:number; dependents:number; children:number; employerSize:EmployerSize; durunuri:boolean; smallWorkplace:boolean; overtime:number; night:number; holiday:number; meal:number; childcare:number; transport:number };
+export type CalculationInput = { inputType:'net'|'gross'; netIncludesSeverance:boolean; amount:number; dependents:number; children:number; employerSize:EmployerSize; durunuri:boolean; smallWorkplace:boolean; overtime:number; night:number; holiday:number; meal:number; childcare:number; transport:number; /** optional overrides (the website leaves them unset) */ pensionCap?:number; accidentRate?:number };
 
 const RATES = { pension:.0475, health:.03595, ltc:.1314, employeeEmployment:.009, accident:.006 };
 const employmentRate:Record<EmployerSize,number> = { under150:.0115, priority:.0135, under1000:.0155, over1000:.0175 };
@@ -11,12 +11,12 @@ const incomeTax = (taxable:number, dependents:number, children:number) => Math.m
 function calculateGross(gross:number, input:CalculationInput){
   const cappedNonTax = Math.min(input.meal,200000)+Math.min(input.childcare,200000)+Math.min(input.transport,200000);
   const taxable = Math.max(0,gross-cappedNonTax);
-  const pensionBase = Math.min(taxable,6370000);
+  const pensionBase = Math.min(taxable,input.pensionCap ?? 6370000);
   const pension=round(pensionBase*RATES.pension), health=round(taxable*RATES.health), longTermCare=round(health*RATES.ltc), unemployment=round(taxable*RATES.employeeEmployment);
   const taxIncome=incomeTax(taxable,input.dependents,input.children), local=round(taxIncome*.1);
   const employeeTotal=pension+health+longTermCare+unemployment;
   const net=gross-employeeTotal-taxIncome-local;
-  const employerUnemployment=round(taxable*employmentRate[input.employerSize]), accident=round(taxable*RATES.accident);
+  const employerUnemployment=round(taxable*employmentRate[input.employerSize]), accident=round(taxable*(input.accidentRate ?? RATES.accident));
   const employerTotal=pension+health+longTermCare+employerUnemployment+accident;
   const eligible=input.durunuri && taxable<2700000;
   const support=eligible?round((pension+round(taxable*.009))*.8):0;
